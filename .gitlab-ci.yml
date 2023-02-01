@@ -4,7 +4,7 @@ workflow:
       when: never
     - if: $CI_COMMIT_BRANCH == "main"
       variables:
-        TAG_NAME: apps1
+        TAG_NAME: apps2
       when: always
    
  
@@ -16,6 +16,6 @@ deploy:
     - ${TAG_NAME}
   script:
   - docker compose down
-  - docker rmi meta_ads_api-meta-ads-api
-  - docker rmi meta_ads_api-nginx
+  # - docker rmi meta_ads_api-meta-ads-api
+  # - docker rmi meta_ads_api-nginx
   - docker compose up -d
