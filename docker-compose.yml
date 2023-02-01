@@ -31,8 +31,8 @@ services:
     environment:
       - "TZ=Europe/Moscow"
     ports:
-#      - 8089:80
-#      - 4440:443
+      - 8081:80
+      - 4449:443
     volumes:
       - /home/get/cert:/app/cert
 
