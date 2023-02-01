@@ -1,0 +1,115 @@
+swagger: "2.0"
+info:
+  title: "Meta marketing ECOM API Documentation"
+  contact:
+    email: "s.fedyushin@gtcom.io"
+  basePath: "/swagger"
+paths:
+  "/metamarketing/addad":
+    post:
+tags:
+  - ads
+summary: "Add ad"
+description: "Add ad method"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+parameters:
+- in: "body"
+  name: "body"
+  required: true
+  schema:
+    type: "object"
+    properties:
+      account_id:
+        type: "integer"
+        example: 1234567890
+        description: Ads account id
+      user_token:
+        type: "string"
+        example: "asddfg22emn2ej0983e47"
+        description: User token
+      name:
+        type: "string"
+        example: "asddfg"
+        description: Name of the ad.
+      adset_id:
+        type: "integer"
+        example: 12345
+        description: The ID of the ad set, required on creation
+      creative_id:
+        type: "integer"
+        example: 12345
+        description: This field is required for create. The ID or creative spec of the ad creative to be used by this ad.
+      status:
+        type: "string"
+        example: "PAUSED"
+        description: Only ACTIVE and PAUSED are valid during creation. Other statuses can be used for update. When an ad is created, it will first go through ad review, and will have the ad status PENDING_REVIEW before it finishes review and reverts back to your selected status of ACTIVE or PAUSED. During testing, it is recommended to set ads to a PAUSED status so as to not incur accidental spend.
+      adlabels:
+        type:
+          - array
+            - object
+        example: []
+        description: Ad labels associated with this ad
+      audience_id:
+        type: "string"
+        example: ""
+        description: The ID of the audience.
+      bid_amount:
+        type: "integer"
+        example: 100
+        description: Bid amount for this ad which will be used in auction instead of the ad set bid_amount, if specified. Any updates to the ad set bid_amount will overwrite this value with the new ad set value.
+      conversion_domain:
+        type: "string"
+        example: "facebook.com"
+        description: The domain where conversions happen. Required to create or update an ad in a campaign that shares data with a pixel. This field will be auto-populated for existing ads by inferring from destination URLs . Note that this field should contain only the first and second level domains, and not the full URL.
+      date_format:
+        type: "string"
+        example: ""
+        description: The format of the date.
+      display_sequence:
+        type: "integer"
+        example: 3
+        description: The sequence of the ad within the same campaign
+      draft_adgroup_id:
+        type: "integer"
+        example: 12345
+        description: The ID of the draft ad.
+      engagement_audience:
+        type: "string"
+        example: "false"
+        enum:
+          - "false"
+          - "true"
+        description: Flag to create a new audience based on users who engage with this ad
+      execution_options:
+        type:
+          - array
+            - string
+        example: ["validate_only"]
+        enum:
+          - "validate_only"
+          - "synchronous_ad_review"
+          - "include_recommendations"
+        description: An execution setting. validate_only - when this option is specified, the API call will not perform the mutation but will run through the validation rules against values of each field. include_recommendations - this option cannot be used by itself. When this option is used, recommendations for ad object's configuration will be included. A separate section recommendations will be included in the response, but only if recommendations for this specification exist. synchronous_ad_review - this option should not be used by itself. It should always be specified with validate_only. When these options are specified, the API call will perform Ads Integrity validations, which include message language checking, image 20% text rule, and so on, as well as the validation logics.
+      include_demolink_hashes:
+        type: "string"
+        example: "false"
+        enum:
+          - "false"
+          - "true"
+        description: Include the demolink hashes.
+      priority:
+        type: "integer"
+        example: 1
+        description: Priority
+      source_ad_id:
+        type: "integer"
+        example: 12345
+        description: ID of the source Ad, if applicable.
+responses:
+  200:
+    description: "OK"
+  400:
+    description: "Bad Request"

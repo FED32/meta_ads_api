@@ -1,0 +1,41 @@
+swagger: "2.0"
+info:
+  title: "Meta marketing ECOM API Documentation"
+  contact:
+    email: "s.fedyushin@gtcom.io"
+  basePath: "/swagger"
+paths:
+  "/metamarketing/getadsets":
+    post:
+tags:
+  - adsets
+summary: "Get adsets"
+description: "Get adsets info. By ad account or by ad campaign"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+parameters:
+- in: "body"
+  name: "body"
+  required: true
+  schema:
+    type: "object"
+    properties:
+      account_id:
+        type: "integer"
+        example: 1234567890
+        description: Ads account id
+      user_token:
+        type: "string"
+        example: "asddfg22emn2ej0983e47"
+        description: User token
+      campaign_id:
+        type: "integer"
+        example: 1234567890
+        description: Campaign id (not required)
+responses:
+  200:
+    description: "OK"
+  400:
+    description: "Bad Request"

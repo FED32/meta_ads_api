@@ -1,0 +1,540 @@
+swagger: "2.0"
+info:
+  title: "Meta marketing ECOM API Documentation"
+  contact:
+    email: "s.fedyushin@gtcom.io"
+  basePath: "/swagger"
+paths:
+  "/metamarketing/addcampaign":
+    post:
+tags:
+  - campaigns
+summary: "Add campaign"
+description: "Add campaign method"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+parameters:
+- in: "body"
+  name: "body"
+  required: true
+  schema:
+    type: "object"
+    properties:
+      account_id:
+        type: "integer"
+        example: 1234567890
+        description: Ads account id
+      user_token:
+        type: "string"
+        example: "asddfg22emn2ej0983e47"
+        description: User token
+      name:
+        type: "string"
+        example: "abcd"
+        description: Name for this campaign (required)
+      objective:
+        type: "string"
+        example: "LINK_CLICKS"
+        enum:
+          - "APP_INSTALLS"
+          - "BRAND_AWARENESS"
+          - "CONVERSIONS"
+          - "EVENT_RESPONSES"
+          - "LEAD_GENERATION"
+          - "LINK_CLICKS"
+          - "LOCAL_AWARENESS"
+          - "MESSAGES"
+          - "OFFER_CLAIMS"
+          - "OUTCOME_APP_PROMOTION"
+          - "OUTCOME_AWARENESS"
+          - "OUTCOME_ENGAGEMENT"
+          - "OUTCOME_LEADS"
+          - "OUTCOME_SALES"
+          - "OUTCOME_TRAFFIC"
+          - "PAGE_LIKES"
+          - "POST_ENGAGEMENT"
+          - "PRODUCT_CATALOG_SALES"
+          - "REACH"
+          - "STORE_VISITS"
+          - "VIDEO_VIEWS"
+        description: Campaign's objective. If it is specified the API will validate that any ads created under the campaign match that objective. Currently, with BRAND_AWARENESS objective, all creatives should be either only images or only videos, not mixed. OUTCOME_APP_PROMOTION, OUTCOME_AWARENESS, OUTCOME_ENGAGEMENT, OUTCOME_LEADS, OUTCOME_SALES, and OUTCOME_TRAFFIC are newer objectives that will eventually replace the original objectives. APP_INSTALLS, BRAND_AWARENESS, CONVERSIONS, EVENT_RESPONSES, LEAD_GENERATION, LINK_CLICKS, LOCAL_AWARENESS, MESSAGES, OFFER_CLAIMS, PAGE_LIKES, POST_ENGAGEMENT, PRODUCT_CATALOG_SALES, REACH, STORE_VISITS, VIDEO_VIEWS.
+      status:
+        type: "string"
+        example: "PAUSED"
+        enum:
+          - "ACTIVE"
+          - "PAUSED"
+          - "DELETED"
+          - "ARCHIVED"
+        description: Only ACTIVE and PAUSED are valid during creation. Other statuses can be used for update. If it is set to PAUSED, its active child objects will be paused and have an effective status CAMPAIGN_PAUSED.
+      special_ad_categories:
+        type:
+          - array
+            - string
+        example: ["NONE"]
+        enum:
+          - "NONE"
+          - "EMPLOYMENT"
+          - "HOUSING"
+          - "CREDIT"
+          - "ISSUES_ELECTIONS_POLITICS"
+          - "ONLINE_GAMBLING_AND_GAMING"
+        description: special_ad_categories (required)
+      adlabels:
+        type:
+          - array
+#            - object
+        example: []
+        description: Ad Labels associated with this campaign
+      bid_strategy:
+        type: "string"
+        example: "COST_CAP"
+        enum:
+          - "LOWEST_COST_WITHOUT_CAP"
+          - "LOWEST_COST_WITH_BID_CAP"
+          - "COST_CAP"
+        description: Choose bid strategy for this campaign to suit your specific business goals. Each strategy has tradeoffs and may be available for certain optimization_goals.
+      buying_type:
+        type: "string"
+        example: "AUCTION"
+        enum:
+          - "AUCTION"
+          - "RESERVED"
+        description: This field will help Facebook make optimizations to delivery, pricing, and limits. All ad sets in this campaign must match the buying type. Possible values are AUCTION (default) RESERVED (for reach and frequency ads).
+      campaign_optimization_type:
+        type: "string"
+        example: "NONE"
+        enum:
+          - "NONE"
+          - "ICO_ONLY"
+        description: campaign_optimization_type
+      daily_budget:
+        type: "integer"
+        example: 1000
+        description: Daily budget of this campaign. All adsets under this campaign will share this budget. You can either set budget at the campaign level or at the adset level, not both.
+      execution_options:
+        type:
+          - array
+            - string
+        example: [ ]
+        enum:
+          - "validate_only"
+          - "include_recommendations"
+        description: An execution setting
+      is_skadnetwork_attribution:
+        type: "string"
+        example: "false"
+        enum:
+          - "false"
+          - "true"
+        description: To create an iOS 14 campaign, enable SKAdNetwork attribution for this campaign.
+      is_using_l3_schedule:
+        type: "string"
+        example: "false"
+        enum:
+          - "false"
+          - "true"
+        description: is_using_l3_schedule
+      iterative_split_test_configs:
+        type:
+          - array
+            - object
+        example: []
+        description: Array of Iterative Split Test Configs created under this campaign
+      lifetime_budget:
+        type: "integer"
+        example: 1000
+        description: Lifetime budget of this campaign. All adsets under this campaign will share this budget. You can either set budget at the campaign level or at the adset level, not both.
+      source_campaign_id:
+        type: "integer"
+        example: 12345678
+        description: Used if a campaign has been copied. The ID from the original campaign that was copied.
+      special_ad_category_country:
+        type:
+          - array
+            - string
+        example: ["RU", "KZ"]
+        enum:
+          - "AD"
+          - "AE"
+          - "AF"
+          - "AG"
+          - "AI"
+          - "AL"
+          - "AM"
+          - "AN"
+          - "AO"
+          - "AQ"
+          - "AR"
+          - "AS"
+          - "AT"
+          - "AU"
+          - "AW"
+          - "AX"
+          - "AZ"
+          - "BA"
+          - "BB"
+          - "BD"
+          - "BE"
+          - "BF"
+          - "BG"
+          - "BH"
+          - "BI"
+          - "BJ"
+          - "BL"
+          - "BM"
+          - "BN"
+          - "BO"
+          - "BQ"
+          - "BR"
+          - "BS"
+          - "BT"
+          - "BV"
+          - "BW"
+          - "BY"
+          - "BZ"
+          - "CA"
+          - "CC"
+          - "CD"
+          - "CF"
+          - "CG"
+          - "CH"
+          - "CI"
+          - "CK"
+          - "CL"
+          - "CM"
+          - "CN"
+          - "CO"
+          - "CR"
+          - "CU"
+          - "CV"
+          - "CW"
+          - "CX"
+          - "CY"
+          - "CZ"
+          - "DE"
+          - "DJ"
+          - "DK"
+          - "DM"
+          - "DO"
+          - "DZ"
+          - "EC"
+          - "EE"
+          - "EG"
+          - "EH"
+          - "ER"
+          - "ES"
+          - "ET"
+          - "FI"
+          - "FJ"
+          - "FK"
+          - "FM"
+          - "FO"
+          - "FR"
+          - "GA"
+          - "GB"
+          - "GD"
+          - "GE"
+          - "GF"
+          - "GG"
+          - "GH"
+          - "GI"
+          - "GL"
+          - "GM"
+          - "GN"
+          - "GP"
+          - "GQ"
+          - "GR"
+          - "GS"
+          - "GT"
+          - "GU"
+          - "GW"
+          - "GY"
+          - "HK"
+          - "HM"
+          - "HN"
+          - "HR"
+          - "HT"
+          - "HU"
+          - "ID"
+          - "IE"
+          - "IL"
+          - "IM"
+          - "IN"
+          - "IO"
+          - "IQ"
+          - "IR"
+          - "IS"
+          - "IT"
+          - "JE"
+          - "JM"
+          - "JO"
+          - "JP"
+          - "KE"
+          - "KG"
+          - "KH"
+          - "KI"
+          - "KM"
+          - "KN"
+          - "KP"
+          - "KR"
+          - "KW"
+          - "KY"
+          - "KZ"
+          - "LA"
+          - "LB"
+          - "LC"
+          - "LI"
+          - "LK"
+          - "LR"
+          - "LS"
+          - "LT"
+          - "LU"
+          - "LV"
+          - "LY"
+          - "MA"
+          - "MC"
+          - "MD"
+          - "ME"
+          - "MF"
+          - "MG"
+          - "MH"
+          - "MK"
+          - "ML"
+          - "MM"
+          - "MN"
+          - "MO"
+          - "MP"
+          - "MQ"
+          - "MR"
+          - "MS"
+          - "MT"
+          - "MU"
+          - "MV"
+          - "MW"
+          - "MX"
+          - "MY"
+          - "MZ"
+          - "NA"
+          - "NC"
+          - "NE"
+          - "NF"
+          - "NG"
+          - "NI"
+          - "NL"
+          - "NO"
+          - "NP"
+          - "NR"
+          - "NU"
+          - "NZ"
+          - "OM"
+          - "PA"
+          - "PE"
+          - "PF"
+          - "PG"
+          - "PH"
+          - "PK"
+          - "PL"
+          - "PM"
+          - "PN"
+          - "PR"
+          - "PS"
+          - "PT"
+          - "PW"
+          - "PY"
+          - "QA"
+          - "RE"
+          - "RO"
+          - "RS"
+          - "RU"
+          - "RW"
+          - "SA"
+          - "SB"
+          - "SC"
+          - "SD"
+          - "SE"
+          - "SG"
+          - "SH"
+          - "SI"
+          - "SJ"
+          - "SK"
+          - "SL"
+          - "SM"
+          - "SN"
+          - "SO"
+          - "SR"
+          - "SS"
+          - "ST"
+          - "SV"
+          - "SX"
+          - "SY"
+          - "SZ"
+          - "TC"
+          - "TD"
+          - "TF"
+          - "TG"
+          - "TH"
+          - "TJ"
+          - "TK"
+          - "TL"
+          - "TM"
+          - "TN"
+          - "TO"
+          - "TR"
+          - "TT"
+          - "TV"
+          - "TW"
+          - "TZ"
+          - "UA"
+          - "UG"
+          - "UM"
+          - "US"
+          - "UY"
+          - "UZ"
+          - "VA"
+          - "VC"
+          - "VE"
+          - "VG"
+          - "VI"
+          - "VN"
+          - "VU"
+          - "WF"
+          - "WS"
+          - "XK"
+          - "YE"
+          - "YT"
+          - "ZA"
+          - "ZM"
+          - "ZW"
+        description: special_ad_category_country
+      spend_cap:
+        type: "integer"
+        example: 12345678
+        description: A spend cap for the campaign, such that it will not spend more than this cap. Defined as integer value of subunit in your currency with a minimum value of $100 USD (or approximate local equivalent). Set the value to 922337203685478 to remove the spend cap.
+      start_time:
+        type: "string"
+        example: "YYYY-MM-DD"
+        description: start_time
+      stop_time:
+        type: "string"
+        example: "YYYY-MM-DD"
+        description: stop_time
+      topline_id:
+        type: "integer"
+        example: 12345678
+        description: Topline ID
+      promoted_object_application_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of a Facebook Application. Usually related to mobile or canvas games being promoted on Facebook for installs or engagement
+      promoted_object_pixel_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of a Facebook conversion pixel. Used with offsite conversion campaigns.
+      promoted_object_custom_event_type:
+        type: "string"
+        example: "RATE"
+        enum:
+          - "RATE"
+          - "TUTORIAL_COMPLETION"
+          - "CONTACT"
+          - "CUSTOMIZE_PRODUCT"
+          - "DONATE"
+          - "FIND_LOCATION"
+          - "SCHEDULE"
+          - "START_TRIAL"
+          - "SUBMIT_APPLICATION"
+          - "SUBSCRIBE"
+          - "ADD_TO_CART"
+          - "ADD_TO_WISHLIST"
+          - "INITIATED_CHECKOUT"
+          - "ADD_PAYMENT_INFO"
+          - "PURCHASE"
+          - "LEAD"
+          - "COMPLETE_REGISTRATION"
+          - "CONTENT_VIEW"
+          - "SEARCH"
+          - "SERVICE_BOOKING_REQUEST"
+          - "MESSAGING_CONVERSATION_STARTED_7D"
+          - "LEVEL_ACHIEVED"
+          - "ACHIEVEMENT_UNLOCKED"
+          - "SPENT_CREDITS"
+          - "LISTING_INTERACTION"
+          - "D2_RETENTION"
+          - "D7_RETENTION"
+          - "OTHER"
+        description: The object this campaign is promoting across all its ads. The event from an App Event of a mobile app, not in the standard event list.
+      promoted_object_object_store_url:
+        type: "string"
+        example: "https://site.com"
+        description: The object this campaign is promoting across all its ads. The uri of the mobile / digital store where an application can be bought / downloaded. This is platform specific. When combined with the "application_id" this uniquely specifies an object which can be the subject of a Facebook advertising campaign.
+      promoted_object_offer_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of an Offer from a Facebook Page.
+      promoted_object_page_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of a Facebook Page.
+      promoted_object_product_catalog_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of a Product Catalog. Used with Dynamic Product Ads.
+      promoted_object_product_item_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of the product item.
+      promoted_object_instagram_profile_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of the instagram profile id.
+      promoted_object_product_set_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of a Product Set within an Ad Set level Product Catalog.
+      promoted_object_event_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of a Facebook Event.
+      promoted_object_offline_conversion_data_set_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of the offline dataset.
+      promoted_object_fundraiser_campaign_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of the fundraiser campaign.
+      promoted_object_custom_event_str:
+        type: "string"
+        example: ""
+        description: The object this campaign is promoting across all its ads. The event from an App Event of a mobile app, not in the standard event list.
+      promoted_object_mcme_conversion_id:
+        type: "integer"
+        example: 12345678
+        description: The object this campaign is promoting across all its ads. The ID of a MCME conversion.
+      promoted_object_omnichannel_object_app:
+        type:
+          - array
+            - object
+        example: []
+        description: The object this campaign is promoting across all its ads.
+      promoted_object_omnichannel_object_pixel:
+        type:
+          - array
+            - object
+        example: []
+        description: The object this campaign is promoting across all its ads.
+      promoted_object_omnichannel_object_onsite:
+        type:
+          - array
+            - object
+        example: []
+        description: The object this campaign is promoting across all its ads.
+responses:
+  200:
+    description: "OK"
+  400:
+    description: "Bad Request"
+

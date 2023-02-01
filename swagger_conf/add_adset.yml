@@ -1,0 +1,557 @@
+swagger: "2.0"
+info:
+  title: "Meta marketing ECOM API Documentation"
+  contact:
+    email: "s.fedyushin@gtcom.io"
+  basePath: "/swagger"
+paths:
+  "/metamarketing/addadset":
+    post:
+tags:
+  - adsets
+summary: "Add adset"
+description: "Add adset method"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+parameters:
+- in: "body"
+  name: "body"
+  required: true
+  schema:
+    type: "object"
+    properties:
+      account_id:
+        type: "integer"
+        example: 1234567890
+        description: Ads account id
+      user_token:
+        type: "string"
+        example: "asddfg22emn2ej0983e47"
+        description: User token
+      t_countries:
+        type:
+          - array
+            - string
+        example: ["US", "GB"]
+        description: Country targeting. Requires array of country codes. https://developers.facebook.com/micro_site/url/?click_from_context_menu=true&country=RU&destination=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Freference%2Fads-api%2Fget-autocomplete-data%2F%23countries&event_type=click&last_nav_impression_id=0w0PpoqW08efMxqHI&max_percent_page_viewed=17&max_viewport_height_px=974&max_viewport_width_px=1813&orig_http_referrer=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fmarketing-api%2Faudiences%2Freference%2Fbasic-targeting&orig_request_uri=https%3A%2F%2Fdevelopers.facebook.com%2Fajax%2Fdocs%2Fnav%2F%3Fpath1%3Dmarketing-api%26path2%3Daudiences%26path3%3Dreference%26path4%3Dbasic-targeting&region=emea&scrolled=true&session_id=1x0TCjvgkif3N10DA&site=developers
+      t_regions:
+        type:
+          - array
+            - integer
+        example: [123, 456]
+        description: State, province, or region. Limit 200. Available values, see https://developers.facebook.com/micro_site/url/?click_from_context_menu=true&country=RU&destination=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Freference%2Fads-api%2Fget-autocomplete-data%2F%23regions&event_type=click&last_nav_impression_id=0w0PpoqW08efMxqHI&max_percent_page_viewed=17&max_viewport_height_px=974&max_viewport_width_px=1813&orig_http_referrer=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fmarketing-api%2Faudiences%2Freference%2Fbasic-targeting&orig_request_uri=https%3A%2F%2Fdevelopers.facebook.com%2Fajax%2Fdocs%2Fnav%2F%3Fpath1%3Dmarketing-api%26path2%3Daudiences%26path3%3Dreference%26path4%3Dbasic-targeting&region=emea&scrolled=true&session_id=1x0TCjvgkif3N10DA&site=developers
+      t_cities_keys:
+        type:
+          - array
+            - integer
+        example: [2479541, 2428908]
+        description: Keys of cities. Limit 250.
+      t_cities_rads:
+        type:
+          - array
+            - integer
+        example: [5, 10]
+        description: Distance around cities, from 10 to 50 miles or 17 to 80 kilometers.
+      t_cities_dist_unit:
+        type: "string"
+        example: "km"
+        description: Distance_unit is mile or kilometer.
+      t_geo_markets_keys:
+        type:
+          - array
+            - string
+        example: ['DMA:501', 'DMA:543']
+        description: Key for market, formatted “DMA:501”. We support all designated market areas (DMA). Get DMA codes at Targeting Search querying by DMA name. Limit 2500. https://developers.facebook.com/micro_site/url/?click_from_context_menu=true&country=RU&destination=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fmarketing-api%2Faudiences%2Freference%2Ftargeting-search%23dmacode&event_type=click&last_nav_impression_id=0w0PpoqW08efMxqHI&max_percent_page_viewed=37&max_viewport_height_px=974&max_viewport_width_px=1813&orig_http_referrer=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fmarketing-api%2Faudiences%2Freference%2Fbasic-targeting&orig_request_uri=https%3A%2F%2Fdevelopers.facebook.com%2Fajax%2Fdocs%2Fnav%2F%3Fpath1%3Dmarketing-api%26path2%3Daudiences%26path3%3Dreference%26path4%3Dbasic-targeting&region=emea&scrolled=true&session_id=1x0TCjvgkif3N10DA&site=developers
+      t_geo_markets_names:
+        type:
+          - array
+            - string
+        example: ['New York', 'Springfield-Holyoke']
+        description: DMA names
+      t_location_types:
+        type:
+          - array
+            - string
+        example: ['recent', 'home']
+        enum:
+          - 'recent'
+          - 'home'
+          - 'travel_in'
+        description: recent - People whose recent location is selected area, as determined from mobile device data. Not available to exclud locations. home - People whose stated location in Facebook profile “current city” is in an area. Facebook validates this by IP and information from their friends’ profile locations. travel_in - People whose most recent location is selected area. Determined by mobile device data, and more than 100 miles from stated current city in their Facebook profile. Not available to exclude locations.
+      t_country_groups:
+        type:
+          - array
+            - string
+        example: ['asia','mercosur']
+        enum:
+          - "worldwide"
+          - "africa"
+          - "afta"
+          - "android_app_store"
+          - "android_free_store"
+          - "apec"
+          - "asia"
+          - "caribbean"
+          - "central_america"
+          - "cisfta"
+          - "eea"
+          - "emerging_markets"
+          - "europe"
+          - "gcc"
+          - "itunes_app_store"
+          - "mercosur"
+          - "nafta"
+          - "north_america"
+          - "oceania"
+          - "south_america"
+        description: Global geographical regions and free trade areas. Provide array of country group codes
+      t_interests_ids:
+        type:
+          - array
+            - integer
+        example: [6003139266461, 6003397425735, 6003659420716]
+        description: Array with ids https://developers.facebook.com/micro_site/url/?click_from_context_menu=true&country=RU&destination=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fmarketing-api%2Faudiences%2Freference%2Ftargeting-search%23interests&event_type=click&last_nav_impression_id=0w0PpoqW08efMxqHI&max_percent_page_viewed=89&max_viewport_height_px=974&max_viewport_width_px=1813&orig_http_referrer=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fmarketing-api%2Faudiences%2Freference%2Fbasic-targeting&orig_request_uri=https%3A%2F%2Fdevelopers.facebook.com%2Fajax%2Fdocs%2Fnav%2F%3Fpath1%3Dmarketing-api%26path2%3Daudiences%26path3%3Dreference%26path4%3Dbasic-targeting&region=emea&scrolled=true&session_id=1x0TCjvgkif3N10DA&site=developers
+      t_interests_names:
+        type:
+          - array
+            - string
+        example: ["Movies", "Tennis", "Cooking"]
+        description: Array with names
+      t_age_max:
+        type: "integer"
+        example: 65
+        description: Maximum age. If used, must be 65 or lower.
+      t_age_min:
+        type: "integer"
+        example: 18
+        description: Minimum age. Defaults to 18. If used, must be 13 or higher. If the app has custom settings for age restrictions, the app's age restrictions will be used for ads with APP_INSTALL goals. For example, if you set age_min to 13 but your app's age minimum is set to 18, 18 will be used in ads targeting.
+      t_genders:
+        type:
+          - array
+            - integer
+        example: [1, 2]
+        enum:
+          - 1
+          - 2
+        description: Genders to target. Defaults to all. 1 targets males, 2 targets females.
+      t_device_platforms:
+        type:
+          - array
+            - string
+        example: ["mobile"]
+      t_publisher_platforms:
+        type:
+          - array
+            - string
+        example: ["facebook","audience_network"]
+      t_behaviors_ids:
+        type:
+          - array
+            - integer
+        example: [6004386044572, 6007101597783]
+        description: Array with ids
+      t_behaviors_names:
+        type:
+          - array
+            - string
+        example: ["Android Owners (All)", "Business Travelers"]
+        description: Array with names
+      name:
+        type: "string"
+        example: "asdf"
+        description: Ad set name, max length of 400 characters.
+      campaign_id:
+        type: "integer"
+        example: 12345678
+        description: The ad campaign you wish to add this ad set to.
+      optimization_goal:
+        type: "string"
+        example: "REACH"
+        enum:
+          - "NONE"
+          - "APP_INSTALLS"
+          - "AD_RECALL_LIFT"
+          - "ENGAGED_USERS"
+          - "EVENT_RESPONSES"
+          - "IMPRESSIONS"
+          - "LEAD_GENERATION"
+          - "QUALITY_LEAD"
+          - "LINK_CLICKS"
+          - "OFFSITE_CONVERSIONS"
+          - "PAGE_LIKES"
+          - "POST_ENGAGEMENT"
+          - "QUALITY_CALL"
+          - "REACH"
+          - "LANDING_PAGE_VIEWS"
+          - "VISIT_INSTAGRAM_PROFILE"
+          - "VALUE"
+          - "THRUPLAY"
+          - "DERIVED_EVENTS"
+          - "APP_INSTALLS_AND_OFFSITE_CONVERSIONS"
+          - "CONVERSATIONS"
+          - "IN_APP_VALUE"
+          - "MESSAGING_PURCHASE_CONVERSION"
+          - "MESSAGING_APPOINTMENT_CONVERSION"
+        description: What the ad set is optimizing for.
+      status:
+        type: "string"
+        example: "PAUSED"
+        enum:
+          - "ACTIVE"
+          - "PAUSED"
+          - "DELETED"
+          - "ARCHIVED"
+        description: Only ACTIVE and PAUSED are valid for creation. The other statuses can be used for update. If it is set to PAUSED, all its active ads will be paused and have an effective status ADSET_PAUSED.
+      bid_amount:
+        type: "integer"
+        example: 2
+        description: Bid cap or target cost for this ad set. The bid cap used in a lowest cost bid strategy is defined as the maximum bid you want to pay for a result based on your optimization_goal.
+      bid_strategy:
+        type: "string"
+        example: "LOWEST_COST_WITHOUT_CAP"
+        enum:
+          - "LOWEST_COST_WITHOUT_CAP"
+          - "LOWEST_COST_WITH_BID_CAP"
+          - "COST_CAP"
+        description: Choose bid strategy for this ad set to suit your specific business goals. Each strategy has tradeoffs and may be available for certain optimization_goals
+      billing_event:
+        type: "string"
+        example: "CLICKS"
+        enum:
+          - "APP_INSTALLS"
+          - "CLICKS, IMPRESSIONS"
+          - "LINK_CLICKS"
+          - "NONE"
+          - "OFFER_CLAIMS"
+          - "PAGE_LIKES"
+          - "POST_ENGAGEMENT"
+          - "THRUPLAY"
+          - "PURCHASE"
+          - "LISTING_INTERACTION"
+        description: The billing event that this ad set is using
+      daily_budget:
+        type: "integer"
+        example: 1000
+        description: The daily budget defined in your account currency, allowed only for ad sets with a duration (difference between end_time and start_time) longer than 24 hours. Either daily_budget or lifetime_budget must be greater than 0.
+      lifetime_budget:
+        type: "integer"
+        example: 1000
+        description: Lifetime budget, defined in your account currency. If specified, you must also specify an end_time. Either daily_budget or lifetime_budget must be greater than 0.
+      start_time:
+        type: "string"
+        example: "2023-01-30"
+        description: The start time of the set, e.g. 2015-03-12 23:59:59-07:00 or 2015-03-12 23:59:59 PDT. UTC UNIX timestamp
+      end_time:
+        type: "string"
+        example: "2015-02-15"
+        description: End time, required when lifetime_budget is specified. e.g. 2015-03-12 23:59:59-07:00 or 2015-03-12 23:59:59 PDT. When creating a set with a daily budget, specify end_time=0 to set the set to be ongoing and have no end date. UTC UNIX timestamp
+      adlabels:
+        type:
+          - array
+            - object
+        example: []
+        description: Specifies list of labels to be associated with this object. This field is optional
+      adset_schedule_start_minutes:
+        type:
+          - array
+            - integer
+        example: [0, 0]
+        description: Ad set schedule, representing a delivery schedule for a single day. A 0 based minute of the day representing when the schedule
+      adset_schedule_end_minutes:
+        type:
+          - array
+            - integer
+        example: [1, 1]
+        description: Ad set schedule, representing a delivery schedule for a single day. A 0 based minute of the day representing when the schedule ends
+      adset_schedule_days:
+        type:
+          - array
+            - array
+              - integer
+        example: [[0, 1, 2, 3], [0, 1, 2, 3]]
+        description: Ad set schedule, representing a delivery schedule for a single day. Array of ints representing which days the schedule is active. Valid values are 0-6 with 0 representing Sunday, 1 representing Monday, ... and 6 representing Saturday.
+      adset_schedule_timezone_type:
+        type:
+          - array
+            - string
+        example: ["USER", "USER"]
+        enum:
+          - "USER"
+          - "ADVERTISER"
+        description: Ad set schedule, representing a delivery schedule for a single day. Default value USER
+      attribution_spec_event_type:
+        type:
+          - array
+            - string
+        example: ["CLICK_THROUGH", "VIEW_THROUGH"]
+        enum:
+          - "CLICK_THROUGH"
+          - "VIEW_THROUGH"
+          - "ENGAGED_VIDEO_VIEW"
+        description: Conversion attribution spec used for attributing conversions for optimization. Supported window lengths differ by optimization goal and campaign objective.
+      attribution_spec_window_days:
+        type:
+          - array
+            - integer
+        example: [2, 3]
+#        description:
+      contextual_bundling_spec_status:
+        type: "string"
+        example: "OPT_OUT"
+        enum:
+          - "OPT_OUT"
+          - "OPT_IN"
+        description: settings of Contextual Bundle to support ads serving in Facebook contextual surfaces
+      creative_sequence:
+        type:
+          - array
+            - integer
+        example: [1, 2, 3]
+        description: Order of the adgroup sequence to be shown to users
+      daily_imps:
+        type: "integer"
+        example: 10
+        description: Daily impressions. Available only for campaigns with buying_type=FIXED_CPM
+      daily_min_spend_target:
+        type: "integer"
+        example: 10
+        description: Daily minimum spend target of the ad set defined in your account currency. To use this field, daily budget must be specified in the Campaign. This target is not a guarantee but our best effort.
+      daily_spend_cap:
+        type: "integer"
+        example: 922337203685478
+        description: Daily spend cap of the ad set defined in your account currency. To use this field, daily budget must be specified in the Campaign. Set the value to 922337203685478 to remove the spend cap.
+      destination_type:
+        type: "string"
+        example: "FACEBOOK"
+        enum:
+          - "UNDEFINED"
+          - "WEBSITE"
+          - "APP"
+          - "MESSENGER"
+          - "APPLINKS_AUTOMATIC"
+          - "FACEBOOK"
+        description: Destination of ads in this Ad Set. Options include Website, App, Messenger, INSTAGRAM_DIRECT.
+      execution_options:
+        type:
+          - array
+            - string
+        example: ["validate_only"]
+        enum:
+          - "validate_only"
+          - "include_recommendations"
+        description: An execution setting. validate_only - when this option is specified, the API call will not perform the mutation but will run through the validation rules against values of each field. include_recommendations - this option cannot be used by itself. When this option is used, recommendations for ad object's configuration will be included. A separate section recommendations will be included in the response, but only if recommendations for this specification exist. If the call passes validation or review, response will be {"success" true}. If the call does not pass, an error will be returned with more details. These options can be used to improve any UI to display errors to the user much sooner, e.g. as soon as a new value is typed into any field corresponding to this ad object, rather than at the upload/save stage, or after review.
+      existing_customer_budget_percentage:
+        type: "integer"
+        example: 100
+        description: existing_customer_budget_percentage
+      frequency_control_specs_events:
+        type:
+          - array
+            - string
+        example: ["IMPRESSIONS"]
+        enum:
+          - "IMPRESSIONS"
+          - "VIDEO_VIEWS"
+          - "VIDEO_VIEWS_2S"
+          - "VIDEO_VIEWS_15S"
+        description: An array of frequency control specs for this ad set. As there is only one event type currently supported, this array has no more than one element. Writes to this field are only available in ad sets where REACH is the objective. Event name, only IMPRESSIONS currently.
+      frequency_control_specs_interval_days:
+        type:
+          - array
+            - integer
+        example: [1]
+        description: Interval period in days, between 1 and 90 (inclusive)
+      frequency_control_specs_max_frequency:
+        type:
+          - array
+            - integer
+        example: [5]
+        description: The maximum frequency, between 1 and 90 (inclusive)
+      is_dynamic_creative:
+        type: "string"
+        example: "false"
+        enum:
+          - "true"
+          - "false"
+        description: Indicates the ad set must only be used for dynamic creatives. Dynamic creative ads can be created in this ad set. Defaults to false
+      lifetime_imps:
+        type: "integer"
+        example: 100
+        description: Lifetime impressions. Available only for campaigns with buying_type=FIXED_CPM
+      lifetime_min_spend_target:
+        type: "integer"
+        example: 5
+        description: Lifetime minimum spend target of the ad set defined in your account currency. To use this field, lifetime budget must be specified in the Campaign. This target is not a guarantee but our best effort.
+      lifetime_spend_cap:
+        type: "integer"
+        example: 922337203685478
+        description: Lifetime spend cap of the ad set defined in your account currency. To use this field, lifetime budget must be specified in the Campaign. Set the value to 922337203685478 to remove the spend cap.
+      multi_optimization_goal_weight:
+        type:  "string"
+        example: "UNDEFINED"
+        enum:
+          - "UNDEFINED"
+          - "BALANCED"
+          - "PREFER_INSTALL"
+          - "PREFER_EVENT"
+        description: multi_optimization_goal_weight
+      optimization_sub_event:
+        type: "string"
+        example: "VIDEO_SOUND_ON"
+        enum:
+          - "NONE"
+          - "VIDEO_SOUND_ON"
+          - "TRIP_CONSIDERATION"
+          - "TRAVEL_INTENT"
+          - "TRAVEL_INTENT_NO_DESTINATION_INTENT"
+          - "TRAVEL_INTENT_BUCKET_01"
+          - "TRAVEL_INTENT_BUCKET_02"
+          - "TRAVEL_INTENT_BUCKET_03"
+          - "TRAVEL_INTENT_BUCKET_04"
+          - "TRAVEL_INTENT_BUCKET_05"
+        description: Optimization sub event for a specific optimization goal (ex Sound-On event for Video-View-2s optimization goal)
+      pacing_type:
+        type:
+          - array
+            - string
+        example: ["standard"]
+        enum:
+          - "standard"
+          - "day_parting"
+          - "no_pacing"
+          - "disabled"
+        description: Defines the pacing type, standard by default or using ad scheduling
+      promoted_object_pixel_id:
+        type: "integer"
+        example: 12345
+        description: Conversion pixel ID or Facebook pixel ID. The ID of a Facebook conversion pixel. Used with offsite conversion campaigns.
+      promoted_object_custom_event_type:
+        type: "string"
+        example:
+        enum:
+          - "RATE"
+          - "TUTORIAL_COMPLETION"
+          - "CONTACT"
+          - "CUSTOMIZE_PRODUCT"
+          - "DONATE"
+          - "FIND_LOCATION"
+          - "SCHEDULE"
+          - "START_TRIAL"
+          - "SUBMIT_APPLICATION"
+          - "SUBSCRIBE"
+          - "ADD_TO_CART"
+          - "ADD_TO_WISHLIST"
+          - "INITIATED_CHECKOUT"
+          - "ADD_PAYMENT_INFO"
+          - "PURCHASE"
+          - "LEAD"
+          - "COMPLETE_REGISTRATION"
+          - "CONTENT_VIEW"
+          - "SEARCH"
+          - "SERVICE_BOOKING_REQUEST"
+          - "MESSAGING_CONVERSATION_STARTED_7D"
+          - "LEVEL_ACHIEVED"
+          - "ACHIEVEMENT_UNLOCKED"
+          - "SPENT_CREDITS"
+          - "LISTING_INTERACTION"
+          - "D2_RETENTION"
+          - "D7_RETENTION"
+          - "OTHER"
+        description: The event from an App Event of a mobile app, not in the standard event list.
+      promoted_object_pixel_rule:
+        type: "string"
+        example: ""
+#        description:
+      promoted_object_event_id:
+        type: "integer"
+        example: 12345
+        description: The ID of a Facebook Event
+      promoted_object_application_id:
+        type: "integer"
+        example: 12345
+        description: The ID of a Facebook Application. Usually related to mobile or canvas games being promoted on Facebook for installs or engagement
+      promoted_object_object_store_url:
+        type: "string"
+        example: ""
+        description: The uri of the mobile / digital store where an application can be bought / downloaded. This is platform specific. When combined with the "application_id" this uniquely specifies an object which can be the subject of a Facebook advertising campaign.
+      promoted_object_offline_conversion_data_set_id:
+        type: "integer"
+        example: 12345
+        description: The ID of the offline dataset.
+      promoted_object_page_id:
+        type: "integer"
+        example: 12345
+        description: The ID of a Facebook Page
+      promoted_object_custom_event_str:
+        type: "string"
+        example: ""
+        description: The event from an App Event of a mobile app, not in the standard event list.
+      promoted_object_product_set_id:
+        type: "integer"
+        example: 12345
+        description: The ID of a Product Set within an Ad Set level Product Catalog. Used with Dynamic Product Ads.
+      promoted_object_offer_id:
+        type: "integer"
+        example: 12345
+        description: The ID of an Offer from a Facebook Page.
+      promoted_object_product_item_id:
+        type: "integer"
+        example: 12345
+        description: The ID of the product item.
+      promoted_object_instagram_profile_id:
+        type: "integer"
+        example: 12345
+        description: The ID of the instagram profile id.
+      promoted_object_fundraiser_campaign_id:
+        type: "integer"
+        example: 12345
+        description: The ID of the fundraiser campaign.
+      promoted_object_mcme_conversion_id:
+        type: "integer"
+        example: 12345
+        description: The ID of a MCME conversion.
+      rf_prediction_id:
+        type: "integer"
+        example: 12345
+        description: Reach and frequency prediction ID
+      time_based_ad_rotation_id_blocks:
+        type:
+          - array
+            - array
+              - integer
+        example: [[1], [2, 3], [1, 4]]
+        description: Specify ad creative that displays at custom date ranges in a campaign as an array. A list of Adgroup IDs. The list of ads to display for each time range in a given schedule. For example display first ad in Adgroup for first date range, second ad for second date range, and so on. You can display more than one ad per date range by providing more than one ad ID per array. For example set time_based_ad_rotation_id_blocks to [[1], [2, 3], [1, 4]]. On the first date range show ad 1, on the second date range show ad 2 and ad 3 and on the last date range show ad 1 and ad 4. Use with time_based_ad_rotation_intervals to specify date ranges.
+      time_based_ad_rotation_intervals:
+        type:
+          - array
+            - integer
+        example: []
+        description: Date range when specific ad creative displays during a campaign. Provide date ranges in an array of UNIX timestamps where each timestamp represents the start time for each date range.
+      time_start:
+        type: "string"
+        example: ""
+        description: Time start
+      time_stop:
+        type: "string"
+        example: ""
+        description: Time stop
+      tune_for_category:
+        type: "string"
+        example: "EMPLOYMENT"
+        enum:
+          - "NONE"
+          - "EMPLOYMENT"
+          - "HOUSING"
+          - "CREDIT"
+          - "ISSUES_ELECTIONS_POLITICS"
+          - "ONLINE_GAMBLING_AND_GAMING"
+        description: tune_for_category
+responses:
+  200:
+    description: "OK"
+  400:
+    description: "Bad Request"
+
+

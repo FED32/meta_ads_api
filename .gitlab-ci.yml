@@ -1,0 +1,21 @@
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'main'
+      when: never
+    - if: $CI_COMMIT_BRANCH == "main"
+      variables:
+        TAG_NAME: apps1
+      when: always
+   
+ 
+stages:
+- deploy
+deploy:
+  stage: deploy
+  tags:
+    - ${TAG_NAME}
+  script:
+  - docker compose down
+  - docker rmi meta_ads_api-meta-ads-api
+  - docker rmi meta_ads_api-nginx
+  - docker compose up -d
