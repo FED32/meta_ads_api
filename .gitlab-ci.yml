@@ -16,6 +16,6 @@ deploy:
     - ${TAG_NAME}
   script:
   - docker compose down
-  # - docker rmi meta_ads_api-meta-ads-api
-  # - docker rmi meta_ads_api-nginx
+  - docker rmi meta_ads_api-meta-ads-api
+  - docker rmi meta_ads_api-nginx
   - docker compose up -d
