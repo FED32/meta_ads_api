@@ -13,3 +13,4 @@ urllib3~=1.26.13
 setuptools~=67.0.0
 requests~=2.28.1
 psycopg2~=2.9.5
+gunicorn
