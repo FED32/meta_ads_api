@@ -11,7 +11,7 @@ RUN mkdir -p ~/.postgresql && \
 
 #CMD ["python", "main.py"]
 #CMD gunicorn -b 0.0.0.0:5000 --timeout 9999 --workers 8 main:app --reload
-CMD gunicorn -b 0.0.0.0:5000 -k uvicorn.workers.UvicornWorker app:app --reload
+CMD gunicorn -b 0.0.0.0:5000 -t 9999 -k uvicorn.workers.UvicornWorker app:app --reload
 
 
 
