@@ -1,0 +1,22 @@
+swagger: "2.0"
+info:
+  title: "Meta marketing ECOM API Documentation"
+  contact:
+    email: "s.fedyushin@gtcom.io"
+  basePath: "/swagger"
+paths:
+  "/metamarketing/authlink":
+    get:
+tags:
+  - account
+summary: "Get authlink"
+description: "Get link for getting access token"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+responses:
+  200:
+    description: "OK"
+  400:
+    description: "Bad Request"
