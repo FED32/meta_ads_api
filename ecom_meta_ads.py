@@ -26,7 +26,8 @@ class MetaAdsEcomru:
 
         if self.app_id is not None and self.app_secret is not None:
             # self.auth_url = f"https://www.facebook.com/v15.0/dialog/oauth?client_id={self.app_id}&redirect_uri={self.redirect_uri}/&scope=ads_management"
-            self.auth_url = f"https://www.facebook.com/v15.0/dialog/oauth?response_type=token&display=popup&client_id={self.app_id}&redirect_uri={self.redirect_uri}%2Ftools%2Fexplorer%2Fcallback&auth_type=rerequest&scope=read_insights%2Cads_management%2Cads_read%2Cbusiness_management"
+            # self.auth_url = f"https://www.facebook.com/v15.0/dialog/oauth?response_type=token&display=popup&client_id={self.app_id}&redirect_uri={self.redirect_uri}%2Ftools%2Fexplorer%2Fcallback&auth_type=rerequest&scope=read_insights%2Cads_management%2Cads_read%2Cbusiness_management"
+            self.auth_url = f"https://www.facebook.com/v15.0/dialog/oauth?response_type=token&client_id={self.app_id}&redirect_uri={self.redirect_uri}%2Ftools%2Fexplorer%2Fcallback&auth_type=rerequest&scope=read_insights%2Cads_management%2Cads_read%2Cbusiness_management"
         else:
             self.auth_url = None
 
