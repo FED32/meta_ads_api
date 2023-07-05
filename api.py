@@ -10,8 +10,6 @@ from db_work import put_query
 from sqlalchemy import create_engine
 import os
 
-# токен для отладки
-# user_token = 'EAAi2zWytf0wBACKJIOUTHHfi2yPYXBGav1TDziJXWwMPv9hdZBd9J4jilcr2UWXyEp9F3n9ZB2k4hXW3wQdHuYXa0ZBy9esRc96BM3CZCjTqPNVxjYU9uKr0yqrgHwv5s9F9bVTAgELxFMz0Q0uIq13UvipYuinIVCrE6w4PLAZDZD'
 
 logger = logger.init_logger()
 
